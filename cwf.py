@@ -1,8 +1,9 @@
-#!/usr/bin/python
+#!/bin/env python
 
 # Matt George
 # http://en.wikipedia.org/wiki/Beerware
 
+from curses.ascii import isupper, islower
 import string
 
 f = open('words.twl')
@@ -10,7 +11,7 @@ f = open('words.twl')
 words = set()
 
 for word in f:
-	if word[0] in string.uppercase:
+	if word[0].isupper():
 		continue
 
 	if word[-1] == "\n":
@@ -39,7 +40,7 @@ import operator
 def do_search(letters, line):
 	extra = ''
 	for c in line:
-		if c in string.lowercase:
+		if c.islower():
 			extra += c
 	
 	allowed = letters + extra
@@ -98,7 +99,8 @@ def change_letters(letters):
 letters = ''
 
 while True:
-	line = raw_input('? ')
+	line = input('? ')
+	line = line.lower()
 
 	if line == '':
 		continue
